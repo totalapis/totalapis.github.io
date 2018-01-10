@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See https://js.arcgis.com/4.4/esri/copyright.txt for details.
+//>>built
+define({travelMode:"Reisem\u00e5te",viewActive:"Et klikk i kartet legger til et stopp",showStop:"Vis dette stoppet",addStopTitle:"Legg til nytt stopp",addStop:"+",dndHandle:"Dra for \u00e5 endre bes\u00f8ksrekkef\u00f8lge",serviceTime:"Servicetid",serviceDistance:"Serviceavstand",leaveNow:"Avreise n\u00e5",departBy:"Avreise innen",gmt:"GMT",time:{min:"min",hr:"t"},units:{esriKilometers:{name:"kilometer",abbr:"km"},esriMeters:{name:"meter",abbr:"m"},esriMiles:{name:"mile(s)",abbr:"mil"},esriFeet:{name:"fot",
+abbr:"ft"},esriYards:{name:"yard",abbr:"yd"},esriNauticalMiles:{name:"nautisk(e) mil",abbr:"nm"}},traffic:{average:"typisk",none:"Ingen trafikkinfo",heavy:"Stor trafikk",light:"Lett trafikk"}});

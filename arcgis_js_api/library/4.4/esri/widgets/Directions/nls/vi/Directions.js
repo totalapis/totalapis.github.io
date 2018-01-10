@@ -1,0 +1,6 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See https://js.arcgis.com/4.4/esri/copyright.txt for details.
+//>>built
+define({travelMode:"H\u00ecnh th\u1ee9c di chuy\u1ec3n",viewActive:"Nh\u1ea5p v\u00e0o b\u1ea3n \u0111\u1ed3 \u0111\u1ec3 th\u00eam m\u1ed9t \u0111i\u1ec3m d\u1eebng",showStop:"Hi\u1ec3n th\u1ecb \u0111i\u1ec3m d\u1eebng n\u00e0y",addStopTitle:"Th\u00eam \u0111i\u1ec3m d\u1eebng m\u1edbi",addStop:"+",dndHandle:"K\u00e9o \u0111\u1ec3 thay \u0111\u1ed5i th\u1ee9 t\u1ef1 \u0111\u1ebfn",serviceTime:"Th\u1eddi gian d\u1ecbch v\u1ee5",serviceDistance:"Kho\u1ea3ng c\u00e1ch d\u1ecbch v\u1ee5",leaveNow:"Tho\u00e1t ngay",
+departBy:"Kh\u1edfi h\u00e0nh tr\u01b0\u1edbc",gmt:"GMT",time:{min:"ph\u00fat",hr:"gi\u1edd"},units:{esriKilometers:{name:"ki-l\u00f4-m\u00e9t",abbr:"km"},esriMeters:{name:"m\u00e9t",abbr:"m"},esriMiles:{name:"d\u1eb7m",abbr:"mi"},esriFeet:{name:"feet",abbr:"ft"},esriYards:{name:"yard",abbr:"yd"},esriNauticalMiles:{name:"h\u1ea3i l\u00fd",abbr:"nm"}},traffic:{average:"th\u00f4ng th\u01b0\u1eddng",none:"Kh\u00f4ng c\u00f3 th\u00f4ng tin L\u01b0u l\u01b0\u1ee3ng giao th\u00f4ng",heavy:"Giao th\u00f4ng M\u1eadt \u0111\u1ed9 cao",
+light:"Giao th\u00f4ng M\u1eadt \u0111\u1ed9 th\u1ea5p"}});

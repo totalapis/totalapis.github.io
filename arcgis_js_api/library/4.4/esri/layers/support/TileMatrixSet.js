@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See https://js.arcgis.com/4.4/esri/copyright.txt for details.
+//>>built
+define("require exports ../../core/tsSupport/declareExtendsHelper ../../core/tsSupport/decorateHelper ../../core/tsSupport/paramHelper ../../core/accessorSupport/decorators ../../core/JSONSupport".split(" "),function(a,h,f,d,k,b,g){a=e=function(a){function b(c){c=a.call(this)||this;c.fullExtent=null;c.id=null;c.tileInfo=null;return c}f(b,a);b.prototype.clone=function(){var a=new e;this.hasOwnProperty("fullExtent")&&(a.fullExtent=this.fullExtent&&this.fullExtent.clone());this.hasOwnProperty("id")&&
+(a.id=this.id);this.hasOwnProperty("tileInfo")&&(a.tileInfo=this.tileInfo&&this.tileInfo.clone());return a};return b}(b.declared(g));d([b.property({json:{read:{source:"fullExtent"}}})],a.prototype,"fullExtent",void 0);d([b.property({json:{read:{source:"id"}}})],a.prototype,"id",void 0);d([b.property({json:{read:{source:"tileInfo"}}})],a.prototype,"tileInfo",void 0);a=e=d([b.subclass("esri.layer.support.TileMatrixSet")],a);var e;return a});

@@ -1,0 +1,220 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no"><title>PointCloudLayer - toggle renderers - 4.4</title><style>html,
+    body,
+    #viewDiv {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      width: 100%;
+    }
+
+    #paneDiv {
+      position: absolute;
+      top: 12px;
+      left: 62px;
+      width: 80%;
+      padding: 12px 12px 12px 12px;
+      background-color: rgba(255, 255, 255, 0.85);
+      border: 1px solid white;
+      color: black;
+    }</style><link rel="stylesheet" href="https://js.arcgis.com/4.4/esri/css/main.css"><script src="https://js.arcgis.com/4.4/"></script><script>require([
+      "esri/Map",
+      "esri/views/SceneView",
+
+      "esri/layers/PointCloudLayer",
+      "esri/renderers/PointCloudUniqueValueRenderer",
+      "esri/renderers/PointCloudRGBRenderer",
+      "esri/renderers/PointCloudStretchRenderer",
+      "esri/renderers/PointCloudClassBreaksRenderer",
+
+      "dojo/on",
+      "dojo/query",
+      "dojo/domReady!"
+    ], function(
+      Map, SceneView, PointCloudLayer,
+      PointCloudUniqueValueRenderer,
+      PointCloudRGBRenderer,
+      PointCloudStretchRenderer,
+      PointCloudClassBreaksRenderer,
+      on, query
+    ) {
+
+      // Create Point Cloud Layer
+      var pcLayer = new PointCloudLayer({
+        url: "https://tiles.arcgis.com/tiles/V6ZHFr6zdgNZuVG0/arcgis/rest/services/BARNEGAT_BAY_LiDAR_UTM/SceneServer"
+      });
+
+      // Create Map and View
+      var map = new Map({
+        basemap: "gray-vector",
+        ground: "world-elevation"
+      });
+
+      var view = new SceneView({
+        container: "viewDiv",
+        map: map,
+        camera: {
+          heading: 210,
+          tilt: 78,
+          position: {
+            x: -8249335,
+            y: 4832005,
+            z: 50.7,
+            spatialReference: {
+              wkid: 3857
+            }
+          }
+        }
+      });
+
+      /******************************************************************
+       *
+       * Display point cloud layer using different renderers
+       *
+       ******************************************************************/
+
+      // Display point cloud based on original scan colors/using the RGB values
+
+      var pointCloudRGBRenderer = new PointCloudRGBRenderer({
+        field: "RGB"
+      });
+
+      // Display point cloud based on unique values in an attribute
+      // Instead of using a constructor you can also create the renderer from a JSON file
+
+      var pointCloudUniqueValueRenderer = new PointCloudUniqueValueRenderer({
+        field: "CLASS_CODE", // field containing data for standard LAS classification
+        colorUniqueValueInfos: [
+        {
+          values: ["1"],
+          label: "Unassigned",
+          color: [180, 180, 180]
+        },
+        {
+          values: ["2"],
+          label: "Ground",
+          color: [222, 184, 135]
+        },
+        {
+          values: ["3"],
+          label: "Low vegetation",
+          color: [200, 232, 171]
+        },
+        {
+          values: ["4"],
+          label: "Medium vegetation",
+          color: [76, 112, 43]
+        },
+        {
+          values: ["5"],
+          label: "High vegetation",
+          color: [76, 112, 43]
+        },
+        {
+          values: ["6"],
+          label: "Building",
+          color: [158, 40, 17]
+        },
+        {
+          values: ["7"],
+          label: "Low Point",
+          color: [255, 255, 255]
+        },
+        {
+          values: ["8"],
+          label: "Reserved",
+          color: [139, 69, 19]
+        },
+        {
+          values: ["9"],
+          label: "Water",
+          color: [13, 68, 80]
+        },
+        {
+          values: ["10"],
+          label: "Rail",
+          color: [255, 233, 68]
+        },
+        {
+          values: ["11"],
+          label: "Road surface",
+          color: [255, 233, 68]
+        },
+        {
+          values: ["12"],
+          label: "Reserved",
+          color: [255, 255, 255]
+        }]
+      });
+
+      // Use the PointCloudStretch renderer to map the values of an attribute
+      // to a continuous color scale
+
+      var pointCloudStretchRenderer = new PointCloudStretchRenderer({
+        field: "ELEVATION", // field containing elevation values
+        stops: [{
+          value: -0.78,
+          color: [61, 51, 158]
+        }, {
+          value: 1,
+          color: [73, 196, 196]
+        }, {
+          value: 2,
+          color: [104, 196, 73]
+        }, {
+          value: 3,
+          color: [235, 232, 84]
+        }, {
+          value: 4,
+          color: [235, 162, 84]
+        }, {
+          value: 12,
+          color: [235, 84, 84]
+        }, {
+          value: 20,
+          color: [100, 100, 100]
+        }]
+      });
+
+      // Classify numerical attribute values and then apply colors based on
+      // resulting classes using the PointCloudClassBreaksRenderer
+
+      var pointCloudClassBreaksRenderer = new PointCloudClassBreaksRenderer({
+        field: "INTENSITY", // field containing intensity values
+        colorClassBreakInfos: [
+        {
+          minValue: 0,
+          maxValue: 30000,
+          color: [255, 255, 255]
+        }, {
+          minValue: 30000,
+          maxValue: 50000,
+          color: [100, 100, 100]
+        }, {
+          minValue: 50000,
+          maxValue: 65700,
+          color: [50, 50, 50]
+        }]
+      });
+
+      // Assign the renderer to the point cloud layers
+
+      pcLayer.renderer = pointCloudRGBRenderer;
+      map.add(pcLayer);
+
+      // Handle change events on radio buttons to switch to the correct renderer
+
+      var rendererType = {
+        rgbRenderer: pointCloudRGBRenderer,
+        uniqueValueRenderer: pointCloudUniqueValueRenderer,
+        stretchRenderer: pointCloudStretchRenderer,
+        classBreaksRenderer: pointCloudClassBreaksRenderer
+      };
+
+      var radios = query("input");
+      for (var i = 0; i < radios.length; i++) {
+        on(radios[i], "change", function() {
+          pcLayer.renderer = rendererType[this.value];
+        });
+      }
+
+    });</script></head><body><div id="viewDiv"></div><div id="paneDiv"><p>Visualize point cloud using:</p><input type="radio" name="renderer" value="rgbRenderer" checked="checked"> Original point cloud scan color (Point Cloud RGB Renderer)<br><input type="radio" name="renderer" value="uniqueValueRenderer"> LAS classification (Point Cloud Unique Values Renderer)<br><input type="radio" name="renderer" value="stretchRenderer"> Elevation mapped on a continuous color scheme (Point Cloud Stretch Renderer)<br><input type="radio" name="renderer" value="classBreaksRenderer"> A classification based on intensity values(Point Cloud Class Breaks Renderer)<br></div></body></html>

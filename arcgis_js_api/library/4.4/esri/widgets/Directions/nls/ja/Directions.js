@@ -1,0 +1,6 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See https://js.arcgis.com/4.4/esri/copyright.txt for details.
+//>>built
+define({travelMode:"\u79fb\u52d5\u30e2\u30fc\u30c9",viewActive:"\u30de\u30c3\u30d7\u3092\u30af\u30ea\u30c3\u30af\u3059\u308b\u3068\u30b9\u30c8\u30c3\u30d7\u304c\u8ffd\u52a0\u3055\u308c\u307e\u3059",showStop:"\u3053\u306e\u30b9\u30c8\u30c3\u30d7\u3092\u8868\u793a",addStopTitle:"\u65b0\u3057\u3044\u30b9\u30c8\u30c3\u30d7\u306e\u8ffd\u52a0",addStop:"+",dndHandle:"\u30c9\u30e9\u30c3\u30b0\u3057\u3066\u8a2a\u554f\u9806\u5e8f\u3092\u5909\u66f4",serviceTime:"\u30b5\u30fc\u30d3\u30b9\u6642\u9593",serviceDistance:"\u30b5\u30fc\u30d3\u30b9\u8ddd\u96e2",
+leaveNow:"\u4eca\u3059\u3050\u79fb\u52d5",departBy:"\u51fa\u767a\u6642\u9593",gmt:"GMT",time:{min:"\u5206",hr:"\u6642\u9593"},units:{esriKilometers:{name:"\u30ad\u30ed\u30e1\u30fc\u30c8\u30eb",abbr:"km"},esriMeters:{name:"\u30e1\u30fc\u30c8\u30eb",abbr:"m"},esriMiles:{name:"\u30de\u30a4\u30eb",abbr:"\u30de\u30a4\u30eb"},esriFeet:{name:"\u30d5\u30a3\u30fc\u30c8",abbr:"ft"},esriYards:{name:"\u30e4\u30fc\u30c9",abbr:"yd"},esriNauticalMiles:{name:"\u6d77\u91cc",abbr:"nm"}},traffic:{average:"\u901a\u5e38",
+none:"\u4ea4\u901a\u60c5\u5831\u306a\u3057",heavy:"\u591a\u3044\u4ea4\u901a\u91cf",light:"\u5c11\u306a\u3044\u4ea4\u901a\u91cf"}});

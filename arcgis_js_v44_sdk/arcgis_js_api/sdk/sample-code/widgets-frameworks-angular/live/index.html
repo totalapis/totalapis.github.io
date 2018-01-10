@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html ng-app="esri-app-example">
+<head>
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+  <meta charset="utf-8">
+  <title>Using widgets with AngularJS - 4.4</title>
+  <link rel="stylesheet" href="https://js.arcgis.com/4.4/esri/css/main.css">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <style>
+    html,
+    body,
+    .esri-view {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+    }
+
+    .zoom-btns {
+      transition: opacity .25s ease-in-out;
+      -moz-transition: opacity .25s ease-in-out;
+      -webkit-transition: opacity .25s ease-in-out;
+      user-select: none;
+      -moz-user-select: none;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+    }
+
+    .button {
+      display: inline-block;
+      position: relative;
+      margin: 5px;
+      width: 50px;
+      height: 50px;
+      line-height: 50px;
+      font-size: 2em;
+      background-color: #fff;
+      color: #646464;
+      cursor: pointer;
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    .button.circle {
+      border-radius: 50%;
+    }
+
+    .button:hover {
+      opacity: 0.8;
+      color: rgba(0, 0, 0, 0.25);
+    }
+
+    .button.raised {
+      transition: box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      transition-delay: 0.2s;
+      box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.25);
+    }
+
+    .button.raised:active {
+      box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2);
+      transition-delay: 0s;
+    }
+
+    .disable {
+      opacity: 0.8;
+      color: rgba(0, 0, 0, 0.25);
+    }
+
+    .disable:hover {
+      opacity: 0.8;
+      color: rgba(0, 0, 0, 0.25);
+      cursor: not-allowed;
+    }
+
+    .material-icons {
+      font-size: 1.2em;
+      line-height: 50px;
+    }
+
+    .view-info {
+      text-align: center;
+      font-family: sans-serif;
+    }
+  </style>
+</head>
+
+<body ng-controller="ExampleController as vm">
+  <!-- this directive is provided by angular-esri-map -->
+  <esri-map-view map="vm.map"
+    view-options="{
+      zoom: 10,
+      center: [-100.33, 25.69],
+      ui: {
+        components: ['attribution']
+      },
+      constraints: {
+        minZoom: 7,
+        maxZoom: 12
+      }
+    }"
+    on-create="vm.onViewCreated">
+
+    <!-- this custom directive provides zoom buttons functionality -->
+    <zoom-buttons view="vm.mapView"
+      view-ui-position="{
+        position: 'bottom-left'
+      }"
+      ng-show="self.viewLoaded">
+    </zoom-buttons>
+
+  </esri-map-view>
+
+  <!-- load Esri JSAPI -->
+  <script src="https://js.arcgis.com/4.4"></script>
+  <!-- load AngularJS -->
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.js"></script>
+  <!-- load angular-esri-map -->
+  <script src="//unpkg.com/angular-esri-map@2"></script>
+
+  <!-- load custom code -->
+  <script>
+    angular.module('esri-app-example', ['esri.map'])
+      .controller('ExampleController', function(esriLoader) {
+        var self = this;
+
+        // set the initial bound property value for the <zoom-buttons> ng-show
+        this.viewLoaded = false;
+
+        // use angular-esri-map to load Esri modules
+        esriLoader.require([
+          'esri/Map'
+        ], function(Map) {
+          // create a Map,
+          // which will become bound to <esri-map-view> by angular-esri-map
+          self.map = new Map({
+            basemap: 'topo'
+          });
+
+          // use the optional callback binding with the <esri-map-view> on-create
+          self.onViewCreated = function(view) {
+            // provide the view instance to the bound scope
+            // of the custom <zoom-buttons> directive (see its link method)
+            self.mapView = view;
+
+            // update the bound property for the <zoom-buttons> ng-show
+            self.viewLoaded = true;
+          };
+        });
+      })
+
+      // this custom directive provides zoom buttons functionality
+      .directive('zoomButtons', function zoomButtons() {
+        return {
+          // element only
+          restrict: 'E',
+
+          // isolate scope
+          scope: {
+            view: '=', // required: a MapView or SceneView instance
+            viewUiPosition: '&' // optional: the layout position relative to the view UI
+            },
+
+          template: [
+            '<div>',
+            '  <div class="zoom-btns">',
+            '    <div class="button circle raised"',
+            '      ng-class="{ \'disable\': !zoomButtonsCtrl.zoomVM.canZoomIn }"',
+            '      ng-click="zoomButtonsCtrl.zoomIn()">',
+            '      <i class="material-icons">add</i>',
+            '    </div>',
+            '    <div class="button circle raised"',
+            '      ng-class="{ \'disable\': !zoomButtonsCtrl.zoomVM.canZoomOut }"',
+            '      ng-click="zoomButtonsCtrl.zoomOut()">',
+            '      <i class="material-icons">remove</i>',
+            '    </div>',
+            '  </div>',
+            '  <div class="view-info">Scale: {{ zoomButtonsCtrl.view.scale | number:1 }}</div>',
+            '  <div class="view-info">Zoom: {{ zoomButtonsCtrl.view.zoom | number:2 }}</div>',
+            '</div>'
+          ].join(''),
+
+          controllerAs: 'zoomButtonsCtrl',
+
+          bindToController: true,
+
+          controller: function zoomButtonsController($element, $scope, esriLoader) {
+            var self = this;
+
+            // get reference to the directive's element
+            var element = $element.children()[0];
+
+            // for AngularJS v1.6+, put initialization logic inside `$onInit()`
+            // to make sure bindings have been initialized
+            this.$onInit = function() {
+                // get reference to the directive's optional view UI position
+                self.uiPosition = self.viewUiPosition();
+            };
+
+            this.setView = function(view) {
+              // the view binding has been changed
+              // (see the directive's link method)
+              if (!view) {
+                return;
+              }
+
+              // load and establish the Esri ZoomViewModel
+              esriLoader.require([
+                'esri/widgets/Zoom/ZoomViewModel'
+              ], function(ZoomVM) {
+                self.zoomVM = new ZoomVM({
+                  view: view
+                });
+
+                // optional: set the UI position of this directive within the view
+                if (self.uiPosition) {
+                  view.ui.add(element, self.uiPosition);
+                }
+
+                view.watch('scale,zoom', function() {
+                  // this is outside of the AngularJS digest cycle;
+                  // apply scope manually to update bindings in the template:
+                  //  - ng-class for the button divs styling
+                  //  - scale and zoom for the view info divs
+                  $scope.$applyAsync();
+                });
+              });
+            };
+
+            // an ng-click in the template is bound to this method
+            this.zoomIn = function() {
+              if (this.zoomVM.canZoomIn) {
+                this.zoomVM.zoomIn();
+              }
+            };
+
+            // an ng-click in the template is bound to this method
+            this.zoomOut = function() {
+              if (this.zoomVM.canZoomOut) {
+                this.zoomVM.zoomOut();
+              }
+            };
+          },
+
+          link: function zoomButtonsLink(scope, element, attrs, controller) {
+            // the directive relies on a MapView or SceneView instance;
+            // watch for the change to the view binding in the ExampleController
+            scope.$watch('zoomButtonsCtrl.view', function(newVal) {
+              controller.setView(newVal);
+            });
+          }
+        };
+      });
+  </script>
+</body>
+</html>

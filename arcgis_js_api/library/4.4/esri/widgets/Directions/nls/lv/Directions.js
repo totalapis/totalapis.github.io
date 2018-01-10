@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See https://js.arcgis.com/4.4/esri/copyright.txt for details.
+//>>built
+define({travelMode:"Ce\u013co\u0161anas re\u017e\u012bms",viewActive:"Noklik\u0161\u0137inot kart\u0113, tiek pievienota pietura",showStop:"R\u0101d\u012bt \u0161o pieturas punktu",addStopTitle:"Pievienot jaunu pieturas punktu",addStop:"+",dndHandle:"Vilkt, lai main\u012btu apmekl\u0113\u0161anas sec\u012bbu",serviceTime:"Servisa laiks",serviceDistance:"Servisa att\u0101lums",leaveNow:"Doties t\u016bl\u012bt",departBy:"Doties ce\u013c\u0101 l\u012bdz",gmt:"GMT",time:{min:"min.",hr:"h"},units:{esriKilometers:{name:"kilometrs(i)",
+abbr:"kilometri"},esriMeters:{name:"metrs(i)",abbr:"metri"},esriMiles:{name:"j\u016bdze(s)",abbr:"j\u016bdzes"},esriFeet:{name:"p\u0113das",abbr:"p\u0113das"},esriYards:{name:"jards(i)",abbr:"jardi"},esriNauticalMiles:{name:"j\u016bras j\u016bdze(s)",abbr:"jj"}},traffic:{average:"parasti",none:"Nav inform\u0101cijas par satiksmi",heavy:"Intens\u012bva satiksme",light:"Br\u012bva satiksme"}});

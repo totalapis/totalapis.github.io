@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+  <title>Scene Layer with point geometries - 4.4</title>
+  <style>
+    html,
+    body,
+    #viewDiv {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+  <link rel="stylesheet" href="https://js.arcgis.com/4.4/esri/css/main.css">
+  <script src="https://js.arcgis.com/4.4/"></script>
+  <script>
+    require([
+      "esri/Map",
+      "esri/views/SceneView",
+      "esri/layers/SceneLayer",
+      "esri/renderers/SimpleRenderer",
+      "esri/symbols/PointSymbol3D",
+      "esri/symbols/IconSymbol3DLayer",
+      "dojo/domReady!"
+    ], function(Map, SceneView, SceneLayer, SimpleRenderer, PointSymbol3D,
+      IconSymbol3DLayer) {
+
+      // setup the renderer with size and color visual variables
+      var renderer = new SimpleRenderer({
+        symbol: new PointSymbol3D({
+          symbolLayers: [new IconSymbol3DLayer()]
+        }),
+        visualVariables: [{
+          // size each icon based on the airport's elevation
+          type: "size",
+          field: "elevation_ft",
+          stops: [
+          {
+            value: 0,
+            size: 2
+          },
+          {
+            value: 15000,
+            size: 35
+          }]
+        }, {
+          // shade each airport a different color based on its type
+          type: "color",
+          field: "type_airport",
+          stops: [{
+            value: 1,
+            color: [252, 12, 245]
+          },
+          {
+            value: 3,
+            color: [83, 0, 244]
+          },
+          {
+            value: 7,
+            color: [4, 245, 248]
+          }]
+        }]
+      });
+
+      // Create SceneLayer from a Scene Service URL
+      var sceneLayer = new SceneLayer({
+        url: "https://tiles.arcgis.com/tiles/V6ZHFr6zdgNZuVG0/arcgis/rest/services/Airports_PointSceneLayer/SceneServer/layers/0",
+        renderer: renderer, // Set the renderer to sceneLayer
+        screenSizePerspectiveEnabled: false // Set perspective to false every time size visual variables are used with icons
+      });
+
+      // Create Map
+      var map = new Map({
+        basemap: "dark-gray",
+        layers: [sceneLayer]
+      });
+
+      // Create the SceneView
+      var view = new SceneView({
+        container: "viewDiv",
+        map: map,
+      });
+    });
+  </script>
+</head>
+
+<body>
+  <div id="viewDiv"></div>
+</body>
+
+</html>

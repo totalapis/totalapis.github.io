@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See https://js.arcgis.com/4.4/esri/copyright.txt for details.
+//>>built
+define({travelMode:"Rejsetilstand",viewActive:"Kortklik tilf\u00f8jet et stop",showStop:"Vis dette stop",addStopTitle:"Tilf\u00f8j nyt stop",addStop:"+",dndHandle:"Tr\u00e6k for at \u00e6ndre bes\u00f8gsr\u00e6kkef\u00f8lge",serviceTime:"Servicetid",serviceDistance:"Serviceafstand",leaveNow:"Afgang nu",departBy:"Afgang kl.",gmt:"GMT",time:{min:"min",hr:"ti."},units:{esriKilometers:{name:"kilometer",abbr:"km"},esriMeters:{name:"meter",abbr:"m"},esriMiles:{name:"mile(s)",abbr:"mile"},esriFeet:{name:"fod",
+abbr:"fod"},esriYards:{name:"yard(s)",abbr:"yard"},esriNauticalMiles:{name:"s\u00f8mil",abbr:"nm"}},traffic:{average:"typisk",none:"Ingen trafikoplysninger",heavy:"T\u00e6t trafik",light:"Let trafik"}});

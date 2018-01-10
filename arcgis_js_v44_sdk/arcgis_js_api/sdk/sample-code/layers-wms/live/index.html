@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+  <title>WMSLayer - 4.4</title>
+
+  <style>
+    html,
+    body,
+    #viewDiv {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+
+  <link rel="stylesheet" href="https://js.arcgis.com/4.4/esri/css/main.css">
+  <script src="https://js.arcgis.com/4.4/"></script>
+
+  <script>
+    var map, view;
+
+    require([
+      "esri/config",
+      "esri/Map",
+      "esri/views/MapView",
+      "esri/layers/WMSLayer",
+      "esri/widgets/ScaleBar",
+      "esri/widgets/Search",
+      "dojo/domReady!"
+    ], function(
+      esriConfig,
+      Map,
+      MapView,
+      WMSLayer,
+      ScaleBar,
+      Search
+    ) {
+      esriConfig.request.proxyUrl = "/proxy/"; // for the initial WMS GetCapabalities request
+      esriConfig.request.corsEnabledServers.push(
+        "mesonet.agron.iastate.edu");
+
+      layer = new WMSLayer({
+        url: "https://geogratis.gc.ca/maps/CBMT"
+        // url: "https://mesonet.agron.iastate.edu/cgi-bin/wms/us/mrms.cgi"
+        // url: "http://atlas.gc.ca/cgi-bin/atlaswms_en"
+      });
+
+      map = new Map({
+        //basemap: "dark-gray",
+        layers: [layer]
+      });
+      view = new MapView({
+        container: "viewDiv",
+        //center: [-123, 49],
+        //zoom: 5,
+        map: map
+      });
+      view.then(function() {
+        view.extent = layer.fullExtent;
+
+        var search = new Search({
+          view: view
+        });
+        view.ui.add(search, "top-right");
+
+        var scalebar = new ScaleBar({
+          view: view
+        });
+        view.ui.add(scalebar, "bottom-left");
+      });
+    });
+  </script>
+
+</head>
+<body>
+  <div id="viewDiv"></div>
+</body>
+</html>

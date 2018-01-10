@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
+  <title>Visualize data with rotation - 4.4</title>
+
+  <style>
+    html,
+    body,
+    #viewDiv {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+
+  <link rel="stylesheet" href="https://js.arcgis.com/4.4/esri/css/main.css">
+  <script src="https://js.arcgis.com/4.4/"></script>
+
+  <script>
+    require([
+      "esri/Map",
+      "esri/views/MapView",
+      "esri/layers/FeatureLayer",
+      "esri/symbols/SimpleMarkerSymbol",
+      "esri/renderers/SimpleRenderer",
+      "dojo/domReady!"
+    ], function(Map, MapView, FeatureLayer, SimpleMarkerSymbol,
+      SimpleRenderer) {
+
+      // Create an arrow symbol pointing upward using
+      // an SVG path
+
+      var symbol = new SimpleMarkerSymbol({
+        color: "white",
+        path: "M14.5,29 23.5,0 14.5,9 5.5,0z",
+        angle: 180,
+        size: 10
+      });
+
+      /******************************************************
+       *
+       * Create a SimpleRenderer where each feature will be
+       * renderered with the same symbol (in this case, an arrow).
+       * Set the symbol on the renderer and a "rotation"
+       * visual variable that points to a field in the stream service
+       * that contains heading information for each feature.
+       * The "geographic" rotation type assumes 0 degrees is due north.
+       *
+       * The color visual variable visualizes the same field data by color.
+       *
+       *******************************************************/
+
+      var rotRenderer = new SimpleRenderer({
+        symbol: symbol,
+        visualVariables: [{
+          type: "rotation",
+          field: "grid_code",
+          rotationType: "geographic"
+        }, {
+          type: "color",
+          field: "grid_code",
+          stops: [
+          {
+            value: 0,
+            color: "#9afb0c"
+          },
+          {
+            value: 22.50,
+            color: "#9afb0c"
+          },
+          {
+            value: 67.50,
+            color: "#00ad43"
+          },
+          {
+            value: 112.50,
+            color: "#0068c0"
+          },
+          {
+            value: 157.50,
+            color: "#6c00a3"
+          },
+          {
+            value: 202.50,
+            color: "#ca009c"
+          },
+          {
+            value: 247.50,
+            color: "#ff5568"
+          },
+          {
+            value: 292.50,
+            color: "#ffab47"
+          },
+          {
+            value: 337.50,
+            color: "#f4fa00"
+          },
+          {
+            value: 360,
+            color: "#9afb0c"
+          }]
+        }]
+      });
+
+      // Construct the layer and add it to the map
+
+      var layer = new FeatureLayer({
+        portalItem: {
+          id: "0e450501fb954f50b981c18d9a9f538b"
+        },
+        renderer: rotRenderer
+      });
+
+      var map = new Map({
+        basemap: "satellite",
+        layers: [layer]
+      });
+
+      var view = new MapView({
+        container: "viewDiv",
+        map: map,
+        center: [-136.34108, 58.651305],
+        zoom: 17
+      });
+
+    });
+  </script>
+</head>
+<body>
+  <div id="viewDiv"></div>
+</body>
+</html>

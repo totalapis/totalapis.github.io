@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See https://js.arcgis.com/4.4/esri/copyright.txt for details.
+//>>built
+define({travelMode:"Na\u010din putovanja",viewActive:"Klikom na karti dodaje se mjesto zaustavljanja",showStop:"Poka\u017ei ovo mjesto zaustavljanja",addStopTitle:"Dodaj novo mjesto zaustavljanja",addStop:"+",dndHandle:"Povucite da biste promijenili redoslijed posje\u0107ivanja",serviceTime:"Servisno vrijeme",serviceDistance:"Udaljenost servisa",leaveNow:"Odmah krenite",departBy:"Oti\u0111ite do",gmt:"GMT",time:{min:"min",hr:"h"},units:{esriKilometers:{name:"kilometar/i",abbr:"km"},esriMeters:{name:"metar/i",
+abbr:"m"},esriMiles:{name:"milja/e",abbr:"mi"},esriFeet:{name:"stope",abbr:"ft"},esriYards:{name:"yard/i",abbr:"yd"},esriNauticalMiles:{name:"nauti\u010dka/e milja/e",abbr:"nm"}},traffic:{average:"obi\u010dno",none:"Nema informacija o prometu",heavy:"Gust promet",light:"Slabi promet"}});

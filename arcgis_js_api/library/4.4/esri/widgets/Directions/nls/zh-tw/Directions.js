@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See https://js.arcgis.com/4.4/esri/copyright.txt for details.
+//>>built
+define({travelMode:"\u884c\u9032\u6a21\u5f0f",viewActive:"\u6309\u4e00\u4e0b\u5730\u5716\u65b0\u589e\u4e00\u500b\u505c\u9760\u9ede",showStop:"\u986f\u793a\u6b64\u505c\u9760\u9ede",addStopTitle:"\u65b0\u589e\u505c\u9760\u9ede",addStop:"+",dndHandle:"\u62d6\u66f3\u4ee5\u8b8a\u66f4\u9020\u8a2a\u9806\u5e8f",serviceTime:"\u670d\u52d9\u6642\u9593",serviceDistance:"\u670d\u52d9\u8ddd\u96e2",leaveNow:"\u7acb\u5373\u96e2\u958b",departBy:"\u96e2\u958b\u65b9\u5f0f",gmt:"GMT",time:{min:"\u5206\u9418",hr:"\u5c0f\u6642"},
+units:{esriKilometers:{name:"\u516c\u91cc",abbr:"km"},esriMeters:{name:"\u516c\u5c3a",abbr:"m"},esriMiles:{name:"\u82f1\u54e9",abbr:"mi"},esriFeet:{name:"\u82f1\u544e",abbr:"ft"},esriYards:{name:"\u78bc",abbr:"yd"},esriNauticalMiles:{name:"\u6d77\u6d6c",abbr:"nm"}},traffic:{average:"\u4e00\u822c",none:"\u7121\u6d41\u91cf\u8cc7\u8a0a",heavy:"\u4ea4\u901a\u7e41\u5fd9",light:"\u4ea4\u901a\u4e0d\u7e41\u5fd9"}});

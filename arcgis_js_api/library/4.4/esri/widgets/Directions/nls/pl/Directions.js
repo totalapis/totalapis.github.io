@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See https://js.arcgis.com/4.4/esri/copyright.txt for details.
+//>>built
+define({travelMode:"Typ podr\u00f3\u017cowania",viewActive:"Klikni\u0119cie mapy dodaje przystanek",showStop:"Poka\u017c ten przystanek",addStopTitle:"Dodaj nowy przystanek",addStop:"+",dndHandle:"Przeci\u0105gnij, aby zmieni\u0107 kolejno\u015b\u0107 przystank\u00f3w",serviceTime:"Czas us\u0142ugi",serviceDistance:"Zasi\u0119g us\u0142ugi",leaveNow:"Opu\u015b\u0107 teraz",departBy:"Odjazd z",gmt:"GMT",time:{min:"min",hr:"godz."},units:{esriKilometers:{name:"kilometr(-y)",abbr:"km"},esriMeters:{name:"metr(-y)",
+abbr:"m"},esriMiles:{name:"mila(-e)",abbr:"mi"},esriFeet:{name:"st\u00f3p/stopy",abbr:"ft"},esriYards:{name:"jard(-y)",abbr:"jard"},esriNauticalMiles:{name:"mila(-e) morska(-ie)",abbr:"Mm"}},traffic:{average:"zwyk\u0142e",none:"Brak informacji o ruchu drogowym",heavy:"Du\u017ce nat\u0119\u017cenie ruchu",light:"Ma\u0142e nat\u0119\u017cenie ruchu"}});

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+  <title>Visualize a Scene Layer with continuous color - 4.4</title>
+  <style>
+    html,
+    body,
+    #viewDiv {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+  <link rel="stylesheet" href="https://js.arcgis.com/4.4/esri/css/main.css">
+  <script src="https://js.arcgis.com/4.4/"></script>
+  <script>
+    require([
+      "esri/Map",
+      "esri/views/SceneView",
+      "esri/layers/SceneLayer",
+      "esri/renderers/SimpleRenderer",
+      "esri/symbols/MeshSymbol3D",
+      "esri/widgets/Legend",
+      "dojo/domReady!"
+    ], function(Map, SceneView, SceneLayer,
+      SimpleRenderer, MeshSymbol3D, Legend
+    ) {
+
+      // Create default MeshSymbol3D for symbolizing SceneLayer
+      // a new FillSymbol3DLayer is created by default within the symbol
+      var symbol = new MeshSymbol3D();
+
+      // Create the renderer and configure visual variables
+      var renderer = new SimpleRenderer({
+        symbol: symbol,
+        visualVariables: [{
+          // specifies a visual variable of continuous color
+          type: "color",
+          // based on a field indicating the year a building was constructed
+          field: "CNSTRCT_YR",
+          legendOptions: {
+            title: "Construction year"
+          },
+          // color ramp from yellow to aqua blue
+          // buildings built between 1915 and 2015 will be
+          // assigned a color proportional to the min and max colors
+          // specified below
+          stops: [
+          {
+            value: 1915,
+            color: "#FBE789",
+            label: "before 1915"
+          },
+          {
+            value: 2015,
+            color: "#1B90A7",
+            label: "after 2015"
+          }]
+        }]
+      });
+
+      // Create SceneLayer and add to the map
+      var sceneLayer = new SceneLayer({
+        url: "https://tiles.arcgis.com/tiles/V6ZHFr6zdgNZuVG0/arcgis/rest/services/NYCatt/SceneServer",
+        title: "New York City buildings",
+        renderer: renderer // Set the renderer to sceneLayer
+      });
+
+      // Create Map
+      var map = new Map({
+        basemap: "gray",
+        ground: "world-elevation",
+        layers: [sceneLayer]
+      });
+
+      // Create the SceneView and add the map
+      var view = new SceneView({
+        container: "viewDiv",
+        map: map,
+        camera: {
+          position: {
+            x: -8241124,
+            y: 4968029,
+            z: 580,
+            spatialReference: 3857
+          },
+          heading: 58,
+          tilt: 86
+        }
+      });
+
+      var legend = new Legend({
+        view: view
+      });
+      view.ui.add(legend, "bottom-right");
+    });
+  </script>
+</head>
+
+<body>
+  <div id="viewDiv"></div>
+</body>
+
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+  <title>Load portal items via drag & drop - 4.4</title>
+
+  <style>
+    html,
+    body {
+      font-family: sans-serif;
+      padding: 0;
+      margin: 0 !important;
+      height: 100%;
+      width: 100%;
+    }
+
+    #viewDiv {
+      position: absolute;
+      right: 0;
+      left: 300px;
+      top: 0;
+      bottom: 0;
+    }
+
+    #itemDiv {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 300px;
+      overflow-y: auto;
+    }
+
+    .description {
+      margin: 0 auto;
+      width: 100%;
+      padding: 20px;
+    }
+
+    h6 {
+      margin: 0 !important;
+    }
+  </style>
+  <link rel="stylesheet" href="https://esri.github.io/calcite-bootstrap/assets/css/calcite-bootstrap-open.min.css">
+  <link rel="stylesheet" href="https://js.arcgis.com/4.4/esri/css/main.css">
+  <script src="https://js.arcgis.com/4.4/"></script>
+
+  <script>
+    require([
+      "esri/WebMap",
+      "esri/views/MapView",
+      "esri/layers/Layer",
+      "esri/portal/PortalItem",
+      "esri/core/lang",
+      "dojo/promise/all",
+      "dojo/on",
+      "dojo/domReady!"
+    ], function(
+      WebMap, MapView,
+      Layer,
+      PortalItem,
+      esriLang,
+      all,
+      on
+    ) {
+
+      /************************************************************
+       * Creates a template to display Portal Item Information.
+       * Any values enclosed in "{}" will be parsed with properties
+       * from an object using the utility method esri/lang::substitute
+       ************************************************************/
+      var template =
+        '<li data-itemid="{id}" draggable="true">' +
+        '<article class="card"><img src="{thumbnailUrl}" alt="Card Thumbnail">' +
+        '<hr>' +
+        '<h6>{title}</h6>' +
+        '<ul class="card-info">' +
+        '<li>{created}</li>' +
+        '<li>{owner}</li>' +
+        '</ul>' +
+        '</article>' +
+        '</li>';
+      // Array of Portal Items for Layers!
+      var layerItems = [
+        "f60bec51707949ca853582bf95412f15", // pop density
+        "48c86debf28a401c8858d714cf85e859" // accidental deaths
+      ];
+      /************************************************************
+       * Creates a new WebMap instance. A WebMap must reference
+       * a PortalItem ID that represents a WebMap saved to
+       * arcgis.com or an on-premise portal.
+       *
+       * To load a WebMap from an on-premise portal, set the portal
+       * url with esriConfig.portalUrl.
+       ************************************************************/
+      var webmap = new WebMap({
+        portalItem: { // autocasts as new PortalItem()
+          id: "2e5f696b97e7424fb5d6ffe001da36b0"
+        }
+      });
+      /************************************************************
+       * Set the WebMap instance to the map property in a MapView.
+       ************************************************************/
+      var view = new MapView({
+        map: webmap, // The WebMap instance created above
+        container: "viewDiv"
+      });
+      /************************************************************
+       * Wait for the MapView to finish loading and create an array
+       * of PortalItems.
+       ************************************************************/
+      view.then(function() {
+        var portalItems = layerItems.map(function(itemid) {
+          /************************************************************
+           * We want to load the PortalItem right away so that we can
+           * read the data, such as "id", "owner", "title", and "created".
+           * This does not load the Layer itself, but returns a Promise.
+           ************************************************************/
+          return (new PortalItem({
+            id: itemid
+          })).load();
+        });
+        /************************************************************
+         * Use dojo/promise/all to wait for all of the PortalItem
+         * Promises to complete loading.
+         ************************************************************/
+        all(portalItems).then(function(items) {
+          /************************************************************
+           * Create a DocumentFragment to hold our list elements
+           * until we are ready to add them to the page.
+           ************************************************************/
+          var docFrag = document.createDocumentFragment();
+          items.map(function(item) {
+            /************************************************************
+             * Use esri/core/lang::substitute will create a new string
+             * using properties from the PortalItem.
+             ************************************************************/
+            var card = esriLang.substitute(item, template);
+            /************************************************************
+             * Create a "div" element to hold the new string from the
+             * template and get the new node from that element to append
+             * it to the DocumentFragment.
+             ************************************************************/
+            var elem = document.createElement("div");
+            elem.innerHTML = card;
+            // This is a technique to turn a DOM string to a DOM element.
+            var target = elem.firstChild;
+            docFrag.appendChild(target);
+            /************************************************************
+             * Listen for the "dragstart" event on the list item.
+             ************************************************************/
+            on(target, "dragstart", function(e) {
+              /************************************************************
+               * Get the data attribute from the element and pass it along
+               * as the data being transferred in the drag event.
+               ************************************************************/
+              var id = e.currentTarget.getAttribute(
+                "data-itemid");
+              e.dataTransfer.setData("text", id);
+            });
+          });
+          /************************************************************
+           * Append the list item to the page.
+           ************************************************************/
+          document.querySelector(".cards-list").appendChild(docFrag);
+          /************************************************************
+           * Listen for "drop" and "dragover" events on the container
+           * of the View.
+           ************************************************************/
+          on(view.container, "drop, dragover", function(e) {
+            if (e.type === "dragover") {
+              e.preventDefault();
+              /************************************************************
+               * On "dragover", you need to specify the dropEffect to drop
+               * items to an element while dragging.
+               ************************************************************/
+              e.dataTransfer.dropEffect = 'copy';
+            } else {
+              /************************************************************
+               * Element has been dropped into container. Get the "id"
+               * that was transferred and find it in the item list.
+               ************************************************************/
+              var id = e.dataTransfer.getData("text");
+              var item = items.filter(function(x) {
+                return x.id === id;
+              })[0];
+              /************************************************************
+               * If the item is a Layer item, create a Layer using
+               * Layer.fromPortalItem.
+               ************************************************************/
+              if (item && item.isLayer) {
+                Layer.fromPortalItem({
+                  portalItem: item
+                }).then(function(lyr) {
+                  /************************************************************
+                   * Add the layer to the map and can update the extent to match
+                   * the items extent.
+                   ************************************************************/
+                  webmap.add(lyr);
+                  view.extent = item.extent;
+                });
+              }
+            }
+          });
+        });
+      });
+
+    });
+  </script>
+</head>
+
+<body>
+  <div id="itemDiv">
+    <label class="description">Drag layer items to Map</label>
+    <ul class="cards-list">
+    </ul>
+  </div>
+  <div id="viewDiv"></div>
+  </div>
+</body>
+
+</html>

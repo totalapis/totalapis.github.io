@@ -1,0 +1,6 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See https://js.arcgis.com/4.4/esri/copyright.txt for details.
+//>>built
+define("require exports ../../core/tsSupport/declareExtendsHelper ../../core/tsSupport/decorateHelper ../../Color ../../core/lang ../../core/screenUtils ../../core/accessorSupport/decorators ./Callout3D ../support/materialUtils ./LineCallout3DBorder".split(" "),function(b,n,g,c,h,e,k,a,l,f,m){b=d=function(b){function a(a){a=b.call(this)||this;a.type="line";a.color=new h([0,0,0,1]);a.size=k.px2pt(1);a.border=null;return a}g(a,b);Object.defineProperty(a.prototype,"visible",{get:function(){return 0<
+this.size&&0<this.color.a},enumerable:!0,configurable:!0});a.prototype.clone=function(){return new d({color:e.clone(this.color),size:this.size,border:e.clone(this.border)})};return a}(a.declared(l));c([a.property({type:String})],b.prototype,"type",void 0);c([a.property(f.colorAndTransparencyProperty)],b.prototype,"color",void 0);c([a.property(f.screenSizeProperty)],b.prototype,"size",void 0);c([a.property({type:m.default,json:{write:!0}})],b.prototype,"border",void 0);c([a.property({dependsOn:["size",
+"color"],readOnly:!0})],b.prototype,"visible",null);b=d=c([a.subclass("esri.symbols.callouts.LineCallout3D")],b);var d;return b});

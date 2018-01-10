@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See https://js.arcgis.com/4.4/esri/copyright.txt for details.
+//>>built
+define("../core/declare dojo/Deferred ../core/Accessor ../core/Promise ../core/Scheduler ../core/Error".split(" "),function(b,d,e,f,c,g){var a={RUNNING:"running",FINISHED:"finished",STOPPED:"stopped"};b=b([e,f],{declaredClass:"esri.views.ViewAnimation",properties:{state:{value:null},target:{value:null}},constructor:function(){this._dfd=new d;this.addResolvingPromise(this._dfd.promise)},initialize:function(){this.state=a.RUNNING},stop:function(){this.state!==a.STOPPED&&this.state!==a.FINISHED&&(this.state=
+a.STOPPED,c.schedule(this._dfd.reject.bind(this._dfd,g("ViewAnimation stopped"))))},finish:function(){this.state!==a.STOPPED&&this.state!==a.FINISHED&&(this.state=a.FINISHED,c.schedule(this._dfd.resolve))}});b.State=a;return b});

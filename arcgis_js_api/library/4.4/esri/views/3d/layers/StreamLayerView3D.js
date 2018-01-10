@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See https://js.arcgis.com/4.4/esri/copyright.txt for details.
+//>>built
+define("require exports ../../../core/tsSupport/declareExtendsHelper ../../../core/tsSupport/decorateHelper ../../../core/accessorSupport/decorators ../../../layers/graphics/controllers/StreamController ../../layers/StreamLayerView ./GraphicLayerView3DBase ../../../core/Error ../../../core/promiseUtils".split(" "),function(b,l,d,c,a,e,f,g,h,k){b=function(b){function a(){var a=b.call(this)||this;a.labelingEnabled=!0;return a}d(a,b);a.prototype.createController=function(){var a=this;return this.layer.createGraphicsController({layerView:this}).then(function(b){if(b instanceof
+e)return a.controller=b;throw Error("Invalid controller created.");}).otherwise(function(a){return k.reject(new h("streamlayerview3d:create-controller",a.message))})};return a}(a.declared(f,g));c([a.property()],b.prototype,"controller",void 0);c([a.property({aliasOf:"controller.graphics",readOnly:!0})],b.prototype,"graphics",void 0);return b=c([a.subclass("esri.views.3d.layers.StreamLayerView3D")],b)});

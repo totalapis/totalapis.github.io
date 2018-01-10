@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See https://js.arcgis.com/4.4/esri/copyright.txt for details.
+//>>built
+define({travelMode:"Kelion\u0117s re\u017eimas",viewActive:"Paspaudus \u017eem\u0117lap\u012f pridedama stotel\u0117",showStop:"Rodyti \u0161i\u0105 stotel\u0119",addStopTitle:"Prid\u0117ti nauj\u0105 stotel\u0119",addStop:"+",dndHandle:"Nuvilkti norint pakeisti\u00a0stoteli\u0173 tvark\u0105",serviceTime:"Paslaugos laikas",serviceDistance:"Paslaugos atstumas",leaveNow:"I\u0161vykti dabar",departBy:"I\u0161va\u017eiuoti iki",gmt:"GMT",time:{min:"min.",hr:"val."},units:{esriKilometers:{name:"kilometras (-ai)",
+abbr:"km"},esriMeters:{name:"metras (-ai)",abbr:"m"},esriMiles:{name:"mylia (-ios)",abbr:"myl."},esriFeet:{name:"p\u0117dos",abbr:"p\u0117dos"},esriYards:{name:"jardas (ai)",abbr:"jard."},esriNauticalMiles:{name:"j\u016brmyl\u0117 (-\u0117s)",abbr:"nm"}},traffic:{average:"paprastai",none:"N\u0117ra eismo informacijos",heavy:"Sud\u0117tingos eismo s\u0105lygos",light:"Paprastos eismo s\u0105lygos"}});

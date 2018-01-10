@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See https://js.arcgis.com/4.4/esri/copyright.txt for details.
+//>>built
+define("require exports ../../../layers/FeatureLayer ./adapters/FeatureLayerAdapter ../../../layers/SceneLayer ./adapters/SceneLayerAdapter ./adapters/LayerAdapter ../../support/arcadeUtils".split(" "),function(m,b,e,f,g,h,k,l){Object.defineProperty(b,"__esModule",{value:!0});b.supportedLayerTypes=["FeatureLayer","SceneLayer"];b.createLayerAdapter=function(a){if(a instanceof k)return a;if(b.supportedLayerTypes.some(function(b){return a.declaredClass.toLowerCase()==="esri.layers."+b.toLowerCase()})){if(a.isInstanceOf(e))return new f({layer:a});
+if(a.isInstanceOf(g))return new h({layer:a})}else return null};b.getFieldsList=function(a){var b=a.field,d=a.normalizationField;a=a.valueExpression;var c=[];a&&(c=l.extractFieldNames(a));b&&c.push(b);d&&c.push(d);return c};b.getUnknownFields=function(a){var b=a.layer;return a.fields.filter(function(a){return!b.getField(a)})}});

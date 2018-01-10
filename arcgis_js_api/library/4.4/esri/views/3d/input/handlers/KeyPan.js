@@ -1,0 +1,6 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See https://js.arcgis.com/4.4/esri/copyright.txt for details.
+//>>built
+define(["require","exports","../../../../core/tsSupport/extendsHelper","../../../input/InputHandler","../../navigation/NavigationConstants"],function(f,h,l,m,n){Object.defineProperty(h,"__esModule",{value:!0});var b=n.Pan.Direction;f=function(f){function g(a,c,k){var d=f.call(this,"esri.views.3d.input.handlers.KeyPan",!0)||this;d.view=a;d.keys=c;d._keyToDirection=(e={},e[c.left]=b.LEFT,e[c.right]=b.RIGHT,e[c.forward]=b.FORWARD,e[c.backward]=b.BACKWARD,e[c.up]=b.UP,e[c.down]=b.DOWN,e);d.registerIncoming("key-down",
+k,function(a){return d._handleKeyDown(a)});d.registerIncoming("key-up",k,function(a){return d._handleKeyUp(a)});return d;var e}l(g,f);g.prototype._handleKeyDown=function(a){a.data.repeat||this._handleKey(a,!0)};g.prototype._handleKeyUp=function(a){this._handleKey(a,!1)};g.prototype._handleKey=function(a,c){var b=this._keyToDirection[a.data.key];null!=b&&(c?this.view.navigation.pan.beginContinuous(b):this.view.navigation.pan.endContinuous(b),a.stopPropagation())};return g}(m.InputHandler);h.KeyPan=
+f});

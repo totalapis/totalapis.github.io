@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See https://js.arcgis.com/4.4/esri/copyright.txt for details.
+//>>built
+define(["require","exports","../../../../core/tsSupport/extendsHelper","../../../input/InputHandler","./support"],function(b,f,g,h,k){Object.defineProperty(f,"__esModule",{value:!0});b=function(b){function e(d,l,a){var c=b.call(this,"esri.views.3d.input.handlers.DragPan",!0)||this;c.view=d;c.pointerType=l;c.registerIncoming("drag",a,function(a){return c._handleDrag(a)});return c}g(e,b);e.prototype._handleDrag=function(d){var b=d.data;if(!(1<b.pointers.length)){var a=b.pointers[0];if(k.eventMatchesPointerType(a.startEvent.native,
+this.pointerType)){var a=[a.currentEvent.x,this.view.height-a.currentEvent.y],c=this.view.navigation.pan;switch(b.action){case "start":c.begin(a,d.timestamp);break;case "update":c.update(a,d.timestamp);break;case "end":c.end(a,d.timestamp)}d.stopPropagation()}}};return e}(h.InputHandler);f.DragPan=b});

@@ -1,0 +1,6 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See https://js.arcgis.com/4.4/esri/copyright.txt for details.
+//>>built
+define("require exports ../../core/Logger ../../core/accessorSupport/ensureType ./Callout3D ./LineCallout3D".split(" "),function(n,c,l,d,e,f){function g(a){if(!a)return!1;a=a.verticalOffset;return!a||0>=a.screenLength||0>=a.maxWorldLength?!1:!0}function h(a,b){void 0===b&&(b=null);if(!d.requiresType(e,a))return a;switch(a.type){case "line":case null:case void 0:return d.ensureType(f,a)}m.error("calloutUtils#cast","Trying to assign invalid value type to property of type esri/symbols/callouts/Callout3D");
+return b}function k(a,b,c){if(!a)return a;switch(a.type){case "line":return b=new f,b.read(a,c),b}}Object.defineProperty(c,"__esModule",{value:!0});var m=l.getLogger("esri.symbols.Callout3D");c.hasVisibleVerticalOffset=g;c.hasVisibleCallout=function(a){if(!a||!a.supportsCallout||!a.supportsCallout())return!1;var b=a.callout;return b&&b.visible?g(a)?!0:!1:!1};c.isCalloutSupport=function(a){return"point-symbol-3d"===a.type||"label-symbol-3d"===a.type};c.cast=h;c.read=k;c.calloutProperty={type:e,cast:function(a){return h(a,
+this.callout)},json:{read:k,write:!0}}});

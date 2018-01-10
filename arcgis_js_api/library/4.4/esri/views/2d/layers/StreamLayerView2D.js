@@ -1,0 +1,4 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See https://js.arcgis.com/4.4/esri/copyright.txt for details.
+//>>built
+define("require exports ../../../core/tsSupport/declareExtendsHelper ../../../core/tsSupport/decorateHelper ../../../core/accessorSupport/decorators ./FeatureLayerView2D ../../layers/StreamLayerView".split(" "),function(a,g,d,c,b,e,f){a=function(a){function b(){return a.call(this)||this}d(b,a);return b}(b.declared(f,e));c([b.property({aliasOf:"controller.graphics",readOnly:!0})],a.prototype,"graphics",void 0);return a=c([b.subclass("esri.views.2d.layers.StreamLayerView2D")],a)});

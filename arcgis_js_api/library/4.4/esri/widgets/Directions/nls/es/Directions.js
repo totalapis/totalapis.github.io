@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See https://js.arcgis.com/4.4/esri/copyright.txt for details.
+//>>built
+define({travelMode:"Modo de viaje",viewActive:"Hacer clic en el mapa a\u00f1ade una parada",showStop:"Mostrar esta parada",addStopTitle:"A\u00f1adir nueva parada",addStop:"+",dndHandle:"Arrastrar para cambiar el orden de visita",serviceTime:"Tiempo de servicio",serviceDistance:"Distancia de servicio",leaveNow:"Salir ahora",departBy:"Salir a las",gmt:"GMT",time:{min:"min",hr:"h"},units:{esriKilometers:{name:"kil\u00f3metro(s)",abbr:"km"},esriMeters:{name:"metro(s)",abbr:"m"},esriMiles:{name:"milla(s)",
+abbr:"mi"},esriFeet:{name:"pies",abbr:"pies"},esriYards:{name:"yarda(s)",abbr:"yd"},esriNauticalMiles:{name:"milla(s) n\u00e1utica(s)",abbr:"mn"}},traffic:{average:"t\u00edpicamente",none:"Sin informaci\u00f3n de tr\u00e1fico",heavy:"Tr\u00e1fico pesado",light:"Tr\u00e1fico ligero"}});

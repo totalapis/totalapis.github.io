@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See https://js.arcgis.com/4.4/esri/copyright.txt for details.
+//>>built
+define({travelMode:"Modo de viagem",viewActive:"Clicar no mapa adiciona uma paragem",showStop:"Exibir esta paragem",addStopTitle:"Adicionar nova paragem",addStop:"+",dndHandle:"Arrastar para alterar a ordem das visitas",serviceTime:"Tempo de Servi\u00e7o",serviceDistance:"Dist\u00e2ncia de Servi\u00e7o",leaveNow:"Partir agora",departBy:"Partir em",gmt:"GMT",time:{min:"m\u00edn.",hr:"hr"},units:{esriKilometers:{name:"quil\u00f3metro(s)",abbr:"km"},esriMeters:{name:"metro(s)",abbr:"m"},esriMiles:{name:"milha(s)",
+abbr:"mi"},esriFeet:{name:"p\u00e9s",abbr:"ft"},esriYards:{name:"jarda(s)",abbr:"yd"},esriNauticalMiles:{name:"milha(s) n\u00e1utica(s)",abbr:"nm"}},traffic:{average:"tipicamente",none:"Sem informa\u00e7\u00f5es de tr\u00e2nsito",heavy:"Tr\u00e2nsito Intenso",light:"Tr\u00e2nsito Flu\u00eddo"}});

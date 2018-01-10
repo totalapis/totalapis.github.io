@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
+  <title>PopupTemplate with promise - 4.4</title>
+
+  <link rel="stylesheet" href="https://js.arcgis.com/4.4/esri/css/main.css">
+  <script src="https://js.arcgis.com/4.4/"></script>
+
+  <style>
+    html,
+    body,
+    #viewDiv {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+
+  <script>
+    require([
+        "esri/Map",
+        "esri/views/MapView",
+        "esri/layers/FeatureLayer",
+        "esri/layers/VectorTileLayer",
+        "esri/layers/GraphicsLayer",
+        "esri/tasks/QueryTask",
+        "esri/tasks/support/Query",
+        "esri/tasks/support/StatisticDefinition",
+        "esri/symbols/SimpleFillSymbol",
+        "esri/renderers/SimpleRenderer",
+        "esri/Basemap",
+        "dojo/domReady!"
+      ],
+      function(
+        Map, MapView, FeatureLayer, VectorTileLayer, GraphicsLayer, QueryTask,
+        Query, StatisticDefinition, SimpleFillSymbol, SimpleRenderer, Basemap
+      ) {
+
+        // Query US block groups that intersect a county that was clicked
+        var queryBlocksTask = new QueryTask({
+          url: "https://server.arcgisonline.com/arcgis/rest/services/Demographics/USA_Population_Density/MapServer/1"
+        });
+
+        // USA counties layer
+        var countiesLayer = new FeatureLayer({
+          url: "https://services.arcgis.com/P3ePLMYs2RVChkJx/ArcGIS/rest/services/USA_Counties/FeatureServer/0",
+          outFields: ["*"],
+          minScale: 0,
+          maxScale: 0,
+          renderer: new SimpleRenderer({
+            symbol: new SimpleFillSymbol({
+              style: "none",
+              outline: {
+                style: "none",
+              }
+            })
+          }),
+          // create a new popupTemplate for the layer
+          popupTemplate: {
+            title: "County of {NAME}",
+            content: queryBlockGroups
+          }
+        });
+
+        // ***********************************************************
+        // Query block groups that intersect the county that was
+        // clicked for statistics. Statistics query will return
+        // number of block groups that intersect the county, minimum,
+        // maximum and average population density (fieldName: POPDENS_CY)
+        // for the block groups. Results will be returned to
+        // popupTemplate's content.
+        // ***********************************************************
+        function queryBlockGroups(target) {
+          // count of block groups that intersect the county
+          var countStatDef = new StatisticDefinition({
+            statisticType: "count",
+            onStatisticField: "POPDENS_CY",
+            outStatisticFieldName: "numBlockGroups"
+          });
+
+          // minimum population density
+          var minStatDef = new StatisticDefinition({
+            statisticType: "min",
+            onStatisticField: "POPDENS_CY",
+            outStatisticFieldName: "minPopDensity"
+          });
+
+          // maximum population density
+          var maxStatDef = new StatisticDefinition({
+            statisticType: "max",
+            onStatisticField: "POPDENS_CY",
+            outStatisticFieldName: "maxPopDensity"
+          });
+
+          // average population density
+          var avgStatDef = new StatisticDefinition({
+            statisticType: "avg",
+            onStatisticField: "POPDENS_CY",
+            outStatisticFieldName: "avgPopDensity"
+          });
+
+          var query = new Query({
+            geometry: target.graphic.geometry,
+            outFields: ["*"],
+            spatialRelationship: "intersects",
+            outStatistics: [countStatDef, minStatDef, maxStatDef,
+              avgStatDef
+            ],
+          });
+
+          // This graphicsLayer is used to highlight
+          // the county that user clicked on
+          graphicsLayer.removeAll();
+          target.graphic.symbol = selectionSymbol;
+          graphicsLayer.add(target.graphic);
+          view.goTo({
+            target: target.graphic.geometry
+          });
+
+          // execute the query task
+          return queryBlocksTask.execute(query).then(function(result) {
+            var stats = result.features[0].attributes;
+
+            // format the query result for the counties popupTemplate's content.
+            return "<b>" + stats.numBlockGroups +
+              "</b> block groups intersect boundary of {NAME}. <br><br>" +
+              "The population density statistics for the block groups: <br>" +
+              "<ul> <li> Minimum: " + Math.round(stats.minPopDensity) +
+              " people/sq mile </li>" +
+              "<li> Maximum: " + Math.round(stats.maxPopDensity) +
+              " people/sq mile </li>" +
+              "<li> Average: " + Math.round(stats.avgPopDensity) +
+              " people/sq mile </li></ul>";
+          });
+        }
+
+        // population density vector tile layer for USA
+        var vtLayer = new VectorTileLayer({
+          url: "https://tiles.arcgis.com/tiles/P3ePLMYs2RVChkJx/arcgis/rest/services/USA_Pop_Density/VectorTileServer",
+          opacity: 0.8
+        });
+
+        // this graphiclayer will be used to
+        // highlight the county that was clicked.
+        var graphicsLayer = new GraphicsLayer();
+        var selectionSymbol = new SimpleFillSymbol({
+          style: "none",
+          outline: {
+            color: "#6600FF",
+            width: 2
+          }
+        });
+
+        var map = new Map({
+          basemap: new Basemap({
+            portalItem: {
+              id: "3582b744bba84668b52a16b0b6942544"
+            }
+          }),
+          layers: [vtLayer, countiesLayer, graphicsLayer]
+        });
+
+        // Create the MapView
+        var view = new MapView({
+          container: "viewDiv",
+          map: map,
+          zoom: 8,
+          center: [-121.106, 37.698]
+        });
+      });
+  </script>
+</head>
+<body>
+  <div id="viewDiv"></div>
+</body>
+</html>

@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See https://js.arcgis.com/4.4/esri/copyright.txt for details.
+//>>built
+define("require exports ../../core/tsSupport/declareExtendsHelper ../../core/tsSupport/decorateHelper ../../core/accessorSupport/decorators ../../core/JSONSupport ../../core/kebabDictionary".split(" "),function(b,h,e,c,a,f,g){var d=g({codedValue:"coded-value"});b=function(b){function a(a){a=b.call(this,a)||this;a.name=null;a.type=null;return a}e(a,b);a.prototype.writeType=function(a,b){b.type=d.toJSON(a)};return a}(a.declared(f));c([a.property({json:{write:!0}})],b.prototype,"name",void 0);c([a.property({json:{read:d.fromJSON,
+write:!0}})],b.prototype,"type",void 0);c([a.writer("type")],b.prototype,"writeType",null);return b=c([a.subclass("esri.layers.support.Domain")],b)});

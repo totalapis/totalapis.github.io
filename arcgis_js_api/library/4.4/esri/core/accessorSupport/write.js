@@ -1,0 +1,6 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See https://js.arcgis.com/4.4/esri/copyright.txt for details.
+//>>built
+define(["require","exports","./PropertyOrigin","./utils","./extensions/serializableProperty"],function(q,h,m,l,n){function p(a,g,d,e,c,b){if(!e||!e.write)return!1;var f=a.get(d);if(void 0===f)return!1;!c&&e.write.overridePolicy&&(a=e.write.overridePolicy.call(a,f,d,b),void 0!==a&&(c=a));c||(c=e.write);return!c||!1===c.enabled||!c.allowNull&&null===f||!c.ignoreOrigin&&b&&b.origin&&g.store.originOf(d)<m.nameToId(b.origin)?!1:!0}function k(a,g,d){if(a&&"function"===typeof a.toJSON&&(!a.toJSON.isDefaultToJSON||
+!a.write))return l.merge(g,a.toJSON());var e=l.getProperties(a),c=e.metadatas,b;for(b in c){var f=n.originSpecificWritePropertyDefinition(c[b],d);if(p(a,e,b,f,null,d)){var h=a.get(b),k={};f.write.writer.call(a,h,k,f.write.target||b,d);f=k;0<Object.keys(f).length&&(g=l.merge(g,f),d&&d.writtenProperties&&d.writtenProperties.push({target:a,propName:b,oldOrigin:m.idToReadableName(e.store.originOf(b)),newOrigin:d.origin}))}}return g}Object.defineProperty(h,"__esModule",{value:!0});h.willPropertyWrite=
+function(a,g,d,e){var c=l.getProperties(a),b=n.originSpecificWritePropertyDefinition(c.metadatas[g],e);return b?p(a,c,g,b,d,e):!1};h.write=k;h.default=k});

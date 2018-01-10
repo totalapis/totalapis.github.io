@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See https://js.arcgis.com/4.4/esri/copyright.txt for details.
+//>>built
+define("require exports ../../../../core/tsSupport/declareExtendsHelper ../../../../core/tsSupport/decorateHelper ../../../../core/accessorSupport/decorators ../../../../core/Accessor".split(" "),function(a,h,e,d,b,g){a=function(a){function b(b){b=a.call(this)||this;b._canZoom=!0;return b}e(b,a);b.prototype.scroll=function(b,a){var d=this;if(this._canZoom){var c=a.data;a=c.x;var f=c.y,c=c.deltaY;if(0===c)this.navigation.end();else{this.navigation.begin();var e=Math.pow(.6,1/60*c);b.constraints.snapToZoom?
+(this._canZoom=!1,0>c?this.navigation.zoomIn([a,f]).then(function(){d._canZoom=!0}):this.navigation.zoomOut([a,f]).then(function(){d._canZoom=!0})):this.navigation.setViewpoint([a,f],e,0)}}};return b}(b.declared(g));d([b.property()],a.prototype,"navigation",void 0);return a=d([b.subclass("esri.views.2d.navigation.actions.Zoom")],a)});

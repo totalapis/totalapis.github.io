@@ -1,0 +1,33 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no"><title>Themes - 4.4</title><link rel="stylesheet" href="https://js.arcgis.com/4.4/esri/themes/dark/main.css"><style>html,
+    body,
+    #viewDiv {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+    }</style><script src="https://js.arcgis.com/4.4/"></script><script>require([
+      "esri/Map",
+      "esri/views/MapView",
+      "esri/widgets/Search",
+      "dojo/domReady!"
+    ], function(Map, MapView, Search) {
+
+      var map = new Map({
+        basemap: "streets-navigation-vector"
+      });
+
+      var view = new MapView({
+        map: map,
+        container: "viewDiv"
+      });
+
+      var search = new Search({
+        view: view
+      });
+
+      view.ui.add(search, "top-right");
+
+      view.then(function() {
+        search.search("Waialea Beach Park, Honolulu")
+      });
+
+    });</script></head><body><div id="viewDiv"></div></body></html>

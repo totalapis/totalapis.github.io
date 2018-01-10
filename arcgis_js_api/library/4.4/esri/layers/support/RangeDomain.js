@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See https://js.arcgis.com/4.4/esri/copyright.txt for details.
+//>>built
+define("require exports ../../core/tsSupport/declareExtendsHelper ../../core/tsSupport/decorateHelper ../../core/accessorSupport/decorators ./Domain".split(" "),function(b,h,f,e,c,g){b=function(d){function a(a){a=d.call(this,a)||this;a.maxValue=null;a.minValue=null;a.type="range";return a}f(a,d);return a}(c.declared(g));e([c.property({json:{read:{source:"range",reader:function(d,a){return a.range&&a.range[1]}},write:{target:"range",writer:function(d,a,b){a[b]=[this.minValue,d]}}}})],b.prototype,"maxValue",
+void 0);e([c.property({json:{read:{source:"range",reader:function(b,a){return a.range&&a.range[0]}},write:{target:"range",writer:function(b,a,c){a[c]=[b,this.maxValue]}}}})],b.prototype,"minValue",void 0);e([c.property()],b.prototype,"type",void 0);return b=e([c.subclass("esri.layers.support.RangeDomain")],b)});

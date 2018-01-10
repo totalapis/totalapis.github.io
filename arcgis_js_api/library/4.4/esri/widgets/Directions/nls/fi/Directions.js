@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See https://js.arcgis.com/4.4/esri/copyright.txt for details.
+//>>built
+define({travelMode:"Matkustustapa",viewActive:"Kartan napsautus lis\u00e4\u00e4 pys\u00e4hdyksen",showStop:"N\u00e4yt\u00e4 t\u00e4m\u00e4 pys\u00e4hdys",addStopTitle:"Lis\u00e4\u00e4 uusi pys\u00e4hdys",addStop:"+",dndHandle:"Muuta vierailuj\u00e4rjestyst\u00e4 vet\u00e4m\u00e4ll\u00e4",serviceTime:"Palveluaika",serviceDistance:"Palveluet\u00e4isyys",leaveNow:"L\u00e4hde nyt",departBy:"L\u00e4ht\u00f6aika",gmt:"GMT",time:{min:"minuuttia",hr:"t"},units:{esriKilometers:{name:"kilometri\u00e4",abbr:"km"},
+esriMeters:{name:"metri\u00e4",abbr:"m"},esriMiles:{name:"mailia",abbr:"mi"},esriFeet:{name:"jalkaa",abbr:"ft"},esriYards:{name:"jaardia",abbr:"yd"},esriNauticalMiles:{name:"merimaili(a)",abbr:"mpk"}},traffic:{average:"yleens\u00e4",none:"Ei liikennetietoja",heavy:"Raskas liikenne",light:"Kevyt liikenne"}});

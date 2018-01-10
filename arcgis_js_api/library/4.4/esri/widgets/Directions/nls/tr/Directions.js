@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See https://js.arcgis.com/4.4/esri/copyright.txt for details.
+//>>built
+define({travelMode:"Seyahat modu",viewActive:"Haritaya t\u0131klanmas\u0131 bir durak ekler",showStop:"Bu dura\u011f\u0131 g\u00f6ster",addStopTitle:"Yeni durak ekle",addStop:"+",dndHandle:"Ziyaret s\u0131ras\u0131n\u0131 de\u011fi\u015ftirmek i\u00e7in s\u00fcr\u00fckleyin",serviceTime:"Servis S\u00fcresi",serviceDistance:"Servis Mesafesi",leaveNow:"\u015eimdi ayr\u0131l",departBy:"Kalk\u0131\u015f saati",gmt:"GMT",time:{min:"dk",hr:"sa"},units:{esriKilometers:{name:"kilometre",abbr:"km"},esriMeters:{name:"metre",
+abbr:"m"},esriMiles:{name:"mil",abbr:"mi"},esriFeet:{name:"fit",abbr:"ft"},esriYards:{name:"yard",abbr:"yd"},esriNauticalMiles:{name:"deniz mili",abbr:"nm"}},traffic:{average:"normal olarak",none:"Trafik bilgisi yok",heavy:"Yo\u011fun Trafik",light:"Hafif Trafik"}});

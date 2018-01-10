@@ -1,0 +1,6 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See https://js.arcgis.com/4.4/esri/copyright.txt for details.
+//>>built
+define("require exports ../core/tsSupport/declareExtendsHelper ../core/tsSupport/decorateHelper dojo/errors/CancelError ../request ../core/accessorSupport/decorators ../core/promiseUtils ../core/Error ./Layer".split(" "),function(a,p,k,e,l,g,d,m,h,n){a=function(a){function b(){return null!==a&&a.apply(this,arguments)||this}k(b,a);b.prototype.getImageUrl=function(a,b,d,c){throw new h("dynamiclayer:getImageUrl-not-implemented","getImageUrl() is not implemented");};b.prototype.fetchImage=function(a,
+b,d,c){a=this.getImageUrl(a,b,d,c);var e={responseType:"image",allowImageDataAccess:c&&c.allowImageDataAccess||!1},f;"string"===typeof a?(f=a,c=g(a,e)):c=a.then(function(a){f=a;return g(f,e)});return c.then(function(a){return a.data}).otherwise(function(a){return m.reject(a instanceof l?a:new h("dynamiclayer:image-fetch-error","Unable to load image: "+f))})};return b}(d.declared(n));e([d.shared({"2d":"../views/2d/layers/MapImageLayerView2D","3d":"../views/3d/layers/DynamicLayerView3D"})],a.prototype,
+"viewModulePaths",void 0);return a=e([d.subclass("esri.layers.DynamicLayer")],a)});

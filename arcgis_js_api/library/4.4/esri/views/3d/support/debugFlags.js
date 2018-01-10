@@ -1,0 +1,6 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See https://js.arcgis.com/4.4/esri/copyright.txt for details.
+//>>built
+define("require exports ../../../core/tsSupport/extendsHelper ../../../core/tsSupport/decorateHelper ../../../core/accessorSupport/decorators ../../../core/Accessor".split(" "),function(b,f,d,c,a,e){b=function(b){function a(){var a=null!==b&&b.apply(this,arguments)||this;a.SCENEVIEW_HITTEST_RETURN_SELECTOR=!1;a.HIGHLIGHTS_GRID_OPTIMIZATION_DISABLED=!1;a.HIGHLIGHTS_VISUALIZE_BLOCKS=!1;a.HIGHLIGHTS_PROFILE_TO_CONSOLE=!1;a.DECONFLICTOR_SHOW_OUTLINES=!1;a.DECONFLICTOR_SHOW_GRID=!1;a.LABELS_SHOW_BORDER=
+!1;return a}d(a,b);return a}(a.declared(e));c([a.property()],b.prototype,"SCENEVIEW_HITTEST_RETURN_SELECTOR",void 0);c([a.property()],b.prototype,"HIGHLIGHTS_GRID_OPTIMIZATION_DISABLED",void 0);c([a.property()],b.prototype,"HIGHLIGHTS_VISUALIZE_BLOCKS",void 0);c([a.property()],b.prototype,"HIGHLIGHTS_PROFILE_TO_CONSOLE",void 0);c([a.property()],b.prototype,"DECONFLICTOR_SHOW_OUTLINES",void 0);c([a.property()],b.prototype,"DECONFLICTOR_SHOW_GRID",void 0);c([a.property()],b.prototype,"LABELS_SHOW_BORDER",
+void 0);b=c([a.subclass()],b);return new b});

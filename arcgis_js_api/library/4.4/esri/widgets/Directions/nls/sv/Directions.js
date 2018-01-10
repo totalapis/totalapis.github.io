@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See https://js.arcgis.com/4.4/esri/copyright.txt for details.
+//>>built
+define({travelMode:"F\u00e4rdl\u00e4ge",viewActive:"Ett klick p\u00e5 kartan l\u00e4gger till ett stopp",showStop:"Visa detta stopp",addStopTitle:"L\u00e4gg till nytt stopp",addStop:"+",dndHandle:"Dra f\u00f6r att \u00e4ndra bes\u00f6ksordningen",serviceTime:"Servicetid",serviceDistance:"Serviceavst\u00e5nd",leaveNow:"\u00c5k nu",departBy:"Avg\u00e5ng",gmt:"GMT",time:{min:"min",hr:"h"},units:{esriKilometers:{name:"kilometer",abbr:"km"},esriMeters:{name:"meter",abbr:"m"},esriMiles:{name:"miles",abbr:"mi"},
+esriFeet:{name:"fot",abbr:"fot"},esriYards:{name:"yard",abbr:"yd"},esriNauticalMiles:{name:"nautiska mil",abbr:"M"}},traffic:{average:"vanligen",none:"Ingen trafikinformation",heavy:"Tung trafik",light:"L\u00e4tt trafik"}});
