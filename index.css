@@ -9,13 +9,13 @@ table{
 }
 tr{
 	margin: 20px 10px;
-	cursor: pointer;
 }
 td{
 	word-break:break-all;
-	vertical-align: middle;
+	vertical-align: middle !important;
 }
-table>tbody>tr>td:hover {
+
+table>tbody>tr:hover {
     background-color: #EEEEEE;  
 }
 
