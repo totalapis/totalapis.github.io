@@ -23,6 +23,15 @@ td a{
 	text-decoration: none;
 }
 
+.k-title{
+	color: white;
+	text-decoration: none;
+}
+.k-title:hover {
+	text-decoration: none;
+	color: white;
+}
+
 .k-td-center{
 	text-align: center;
 }
